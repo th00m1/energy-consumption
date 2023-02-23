@@ -17,6 +17,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/scss"
+              ]
+            },
             "outputPath": "dist/angular-scss-boilerplate",
             "index": "src/index.html",
             "main": "src/main.ts",

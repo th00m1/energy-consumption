@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-folders-by-feature": {
+    "angular-scss-boilerplate": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -22,7 +22,7 @@
                 "src/scss"
               ]
             },
-            "outputPath": "dist/angular-folders-by-feature",
+            "outputPath": "dist/angular-scss-boilerplate",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -70,10 +70,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular-folders-by-feature:build:production"
+              "browserTarget": "angular-scss-boilerplate:build:production"
             },
             "development": {
-              "browserTarget": "angular-folders-by-feature:build:development"
+              "browserTarget": "angular-scss-boilerplate:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -81,7 +81,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-folders-by-feature:build"
+            "browserTarget": "angular-scss-boilerplate:build"
           }
         },
         "test": {

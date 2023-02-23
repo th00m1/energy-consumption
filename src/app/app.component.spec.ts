@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'angular-folders-by-feature'`, () => {
+  it(`should have as title 'angular-scss-boilerplate'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-folders-by-feature');
+    expect(app.title).toEqual('angular-scss-boilerplate');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('angular-folders-by-feature app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('angular-scss-boilerplate app is running!');
   });
 });

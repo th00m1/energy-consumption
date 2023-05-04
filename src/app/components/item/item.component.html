@@ -1,0 +1,7 @@
+<div class="item" [ngClass]="{'low': isChecked && id === 0, 'performance': isChecked && id === 1, 'smart': isChecked && id === 2, 'custom': isChecked && id === 3}" (click)="checkItem()">
+    <app-checkmark [isChecked]="isChecked" />
+    <div class="item__content">
+        <h2 class="content__title">{{title}}</h2>
+        <p class="content__text">{{subtitle}}</p>
+    </div>
+</div>

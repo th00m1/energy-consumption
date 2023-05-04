@@ -1,0 +1,6 @@
+<div class="item-list">
+    <app-slider *ngIf="(activeItem$ | async) as activeItem" [value]="activeItem.value" [mode]="activeItem.mode" [isDisabled]="activeItem.disableSlider" />
+    <ng-container *ngFor="let item of (items$ | async)">
+        <app-item [id]="item.id" [subtitle]="item.subtitle" [title]="item.title" [isChecked]="item.isChecked" />
+    </ng-container>
+</div>

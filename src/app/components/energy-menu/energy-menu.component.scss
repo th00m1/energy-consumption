@@ -1,0 +1,13 @@
+@import 'all.scss';
+
+
+.energy-menu {
+    max-width: 600px;
+
+    &__name {
+        text-align: center;
+        margin-bottom: rem(20);
+        font-size: rem(20);
+        font-weight: $font-bold;
+    }
+}

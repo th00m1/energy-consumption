@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && npm run build:extension-worker",
+    "build:extension-worker": "tsc ./src/extension/header-updater.worker.ts --outDir ./dist/angular-scss-boilerplate/extension/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "eslint . --ext .ts"
@@ -28,6 +29,7 @@
     "@angular-devkit/build-angular": "^15.2.0",
     "@angular/cli": "~15.2.0",
     "@angular/compiler-cli": "^15.2.0",
+    "@types/chrome": "^0.0.235",
     "@types/jasmine": "~4.3.0",
     "@typescript-eslint/eslint-plugin": "^5.53.0",
     "@typescript-eslint/parser": "^5.53.0",

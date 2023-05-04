@@ -1,4 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'all.scss';
+
 *,
 *::before,
 *::after {
@@ -6,4 +7,25 @@
     padding: 0;
     box-sizing: border-box;
     font: inherit;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    background: $bg-color;
+    font-family: $font-family;
+    color: $text-main-color;
+    padding: rem(10);
+}
+
+h1 {
+    font-weight: $font-bold;
+    font-size: $font-h1-size;
+    color: $text-main-color;
+}
+
+h2 {
+    font-weight: $font-bold;
+    font-size: $font-h2-size;
+    color: $text-secondary-color;
 }

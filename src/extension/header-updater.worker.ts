@@ -23,8 +23,15 @@ const createRule = (value: number) : chrome.declarativeNetRequest.Rule => {
     }
 }
 
-
 chrome.declarativeNetRequest.updateDynamicRules({
     removeRuleIds: [1],
     addRules: [createRule(100)]
+});
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    chrome.declarativeNetRequest.updateDynamicRules({
+        removeRuleIds: [1],
+        addRules: [createRule(request.value)]
+    });
+    sendResponse({ message: '✅ energy header updated, new value : ' + request.value });
 });

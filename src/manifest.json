@@ -11,7 +11,8 @@
         "declarativeNetRequestFeedback",
         "tabs",
         "activeTab",
-        "webRequest"
+        "webRequest",
+        "storage"
     ],
       "host_permissions": [
         "<all_urls>"

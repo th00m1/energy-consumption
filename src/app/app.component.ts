@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ItemsService } from './services/items.service';
 import { HttpClient } from '@angular/common/http';
 
@@ -9,22 +9,22 @@ declare var Chrome: typeof chrome;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'angular-scss-boilerplate';
 
-  constructor(private http: HttpClient) {
-    this.wait(15).then(() => { 
-      this.http.get('https://jsonplaceholder.typicode.com/todos/1').subscribe((res) => {
-        console.log(res);
-      });
-    });
+  constructor(private itemsService: ItemsService) {
+    this.itemsService.initItems();
   }
 
-  wait(sec: number) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(true);
-      }, sec * 1000);
+  ngOnInit() { 
+    chrome.storage.sync.get(['energy', 'id']).then((result) => {
+      const { energy, id } = result;
+      console.log("result", result)
+      if(!energy || !id) return;
+      this.itemsService.setItems(id, energy);
+      chrome.runtime.sendMessage({ value: energy }, (response) => {
+        console.log(response);
+      });
     });
   }
 

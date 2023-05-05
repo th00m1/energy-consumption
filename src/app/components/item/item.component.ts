@@ -11,10 +11,10 @@ export class ItemComponent {
   @Input('title') title = '';
   @Input('subtitle') subtitle = '';
   @Input('id') id = -1;
+  @Input('value') value = 0;
 
-  constructor(private itemsService: ItemsService)
- {}
+  constructor(private itemsService: ItemsService) {}
   checkItem(): void {
-    this.itemsService.setItems(this.id);
+    this.itemsService.setItems(this.id, this.value);
   }
 }

@@ -24,7 +24,7 @@ const INITIAL_STATE: Item[] = [
   {
     title: 'Low consumption 🍃',
     subtitle:'Lorem ipsum dolor sit amet, consectetur adipiscing.',
-    isChecked: true,
+    isChecked: false,
     mode: ConsumptionMode.LOW,
     description: 'Low Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     value: 20,
@@ -41,14 +41,6 @@ const INITIAL_STATE: Item[] = [
     disableSlider: true,
     id: 1
   },
-  // {
-  //   title: 'Smart 🧠',
-  //   subtitle:'Lorem ipsum dolor sit amet, consectetur adipiscing.',
-  //   isChecked: false,
-  //   mode: ConsumptionMode.SMART,
-  //   description: 'Smart Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  //   id: 2
-  // },
   {
     title: 'Custom 🛠️',
     subtitle:'Lorem ipsum dolor sit amet, consectetur adipiscing.',
@@ -61,6 +53,8 @@ const INITIAL_STATE: Item[] = [
   },
 ]
 
+const INIT_ITEM = INITIAL_STATE[0];
+
 @Injectable({
   providedIn: 'root'
 })
@@ -72,17 +66,42 @@ export class ItemsService {
   constructor() {}
 
   
-
+  initItems(): void {
+    chrome.storage.sync.get(['id','energy']).then((result) => {
+      const {id, energy} = result;
+      console.log('init item', id, energy)
+      if(!id || !energy) {
+        this.setItems(INIT_ITEM.id, INIT_ITEM.value);
+        return;
+      };
+      this.setItems(id, energy);
+    })
+  }
 
   getItems(): Observable<Item[]> {
     return this.items$;
   }
 
-  setItems(id: number): void {
+  setItems(id: number, value: number): void {
     const updatedItems = this.itemsSubject.value.map(item => {
-     return {...item, isChecked: id === item.id} 
+      if(item.id === id) {
+        item.value = value;
+        item.isChecked = true;
+      }else {
+        item.isChecked = false;
+      }
+     return item;
     });
+
     this.itemsSubject.next(updatedItems);
+    chrome.storage.sync.set({'energy': value }).then(() => {
+      chrome.storage.sync.set({'id': id }).then(() => {
+        chrome.runtime.sendMessage({ value }).then((response) => {
+          console.log('Value is set to ' + value);
+        })
+      });
+    });
+
   }
 
   getActiveStatus(): Observable<Item> {

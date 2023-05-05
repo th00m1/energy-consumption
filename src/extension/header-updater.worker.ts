@@ -5,10 +5,10 @@ const allResourceTypes = Object.values(chrome.declarativeNetRequest.ResourceType
 const createRule = (value: number) : chrome.declarativeNetRequest.Rule => {
     return {
         id: 1,
-        priority: 100,
+        priority: 1,
         action: {
             type: chrome.declarativeNetRequest.RuleActionType.MODIFY_HEADERS,
-            responseHeaders: [
+            requestHeaders: [
                 {
                     operation: chrome.declarativeNetRequest.HeaderOperation.SET,
                     header:  HEADER_NAME,
@@ -17,23 +17,14 @@ const createRule = (value: number) : chrome.declarativeNetRequest.Rule => {
             ]
         },
         condition: {
-            urlFilter: '<all_urls>',
-            resourceTypes: [chrome.declarativeNetRequest.ResourceType.MAIN_FRAME]
+            urlFilter: '|*',
+            resourceTypes: allResourceTypes
         }
     }
 }
 
-const updateHeader = async  (value: number) => { 
-    chrome.declarativeNetRequest.updateDynamicRules({
-        removeRuleIds: [1],
-        addRules: [createRule(value)]
-     });
-}
 
-chrome.tabs.onActivated.addListener((e) => { 
-    updateHeader(100);
-})
-
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => { 
-    updateHeader(100);
-})
+chrome.declarativeNetRequest.updateDynamicRules({
+    removeRuleIds: [1],
+    addRules: [createRule(100)]
+});

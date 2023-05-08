@@ -19,7 +19,6 @@ export class AppComponent implements OnInit {
   ngOnInit() { 
     chrome.storage.sync.get(['energy', 'id']).then((result) => {
       const { energy, id } = result;
-      console.log("result", result)
       if(!energy || !id) return;
       this.itemsService.setItems(id, energy);
       chrome.runtime.sendMessage({ value: energy }, (response) => {

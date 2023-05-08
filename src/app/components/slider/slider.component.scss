@@ -13,9 +13,18 @@
     }
 
     &.CUSTOM {
+
         
         span {
             color: $text-main-color;
+        }
+
+        .slider-container__input {
+            cursor: pointer !important;
+
+            &::-webkit-slider-thumb {
+                cursor: pointer !important; 
+            }
         }
 
         --slider-color: #{$custom-check-color};
@@ -33,6 +42,8 @@
         height: rem(10);
         border-radius: rem(5);
         background-color: $item-border-color;
+        cursor: not-allowed;
+
 
         &::-webkit-slider-thumb {
             -webkit-appearance: none; 
@@ -41,7 +52,7 @@
             height: rem(15); 
             border-radius: 50%;
             background: var(--slider-color); 
-            cursor: pointer; 
+            cursor: not-allowed; 
         }
     }
 
@@ -58,7 +69,7 @@
             width: rem(25);
             text-align: center;
             font-size: $font-secondary-size;
-            color: $item-border-color;
+            color: $text-secondary-color;
         }
 
     }

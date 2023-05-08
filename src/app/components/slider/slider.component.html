@@ -1,7 +1,6 @@
 <div class="slider-container" [ngClass]="mode">
-    <input type="range" step="10" [formControl]="sliderValue" (input)="valueChanged()" [value]="value"  min="0" max="100" class="slider-container__input">
+    <input type="range" step="10" [formControl]="sliderValue" (input)="valueChanged()" [value]="value"  min="10" max="100" class="slider-container__input">
     <div class="slider-container__graduation">
-        <span>0%</span>
         <span>10%</span>
         <span>20%</span>
         <span>30%</span>

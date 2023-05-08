@@ -7,11 +7,11 @@ import { ItemsService } from 'src/app/services/items.service';
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent {
-  @Input('isChecked') isChecked = false;
-  @Input('title') title = '';
-  @Input('subtitle') subtitle = '';
-  @Input('id') id = -1;
-  @Input('value') value = 0;
+  @Input() isChecked = false;
+  @Input() title = '';
+  @Input() subtitle = '';
+  @Input() id = -1;
+  @Input() value = 0;
 
   constructor(private itemsService: ItemsService) {}
   checkItem(): void {

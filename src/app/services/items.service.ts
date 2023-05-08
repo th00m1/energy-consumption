@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, filter, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 
 export enum ConsumptionMode {
   LOW = 'LOW',
@@ -73,7 +73,7 @@ export class ItemsService {
       if(!id || !energy) {
         this.setItems(INIT_ITEM.id, INIT_ITEM.value);
         return;
-      };
+      }
       this.setItems(id, energy);
     })
   }
@@ -97,7 +97,7 @@ export class ItemsService {
     chrome.storage.sync.set({'energy': value }).then(() => {
       chrome.storage.sync.set({'id': id }).then(() => {
         chrome.runtime.sendMessage({ value }).then((response) => {
-          console.log('Value is set to ' + value);
+          console.log('Value is set to ' + value, id);
         })
       });
     });

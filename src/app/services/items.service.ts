@@ -99,8 +99,11 @@ export class ItemsService {
         chrome.runtime.sendMessage({ value }).then((response) => {
           console.log('Value is set to ' + value, id);
         })
+      }).catch((error) => {
+        console.error(error);
       });
-    });
+    }).catch((error) => { console.log(error) });
+    ;
 
   }
 

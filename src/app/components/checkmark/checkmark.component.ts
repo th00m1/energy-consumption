@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./checkmark.component.scss']
 })
 export class CheckmarkComponent {
-  @Input('isChecked') isChecked = false;
+  @Input() isChecked = false;
 
   change(): void {
     console.log('change')

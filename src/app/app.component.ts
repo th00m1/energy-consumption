@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemsService } from './services/items.service';
-import { HttpClient } from '@angular/common/http';
 
-declare var Chrome: typeof chrome;
 
 @Component({
   selector: 'app-root',
@@ -10,7 +8,7 @@ declare var Chrome: typeof chrome;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'angular-scss-boilerplate';
+  title = 'chrome-extension-manage-energy-consumption';
 
   constructor(private itemsService: ItemsService) {
     this.itemsService.initItems();

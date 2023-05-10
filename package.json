@@ -1,11 +1,11 @@
 {
-  "name": "angular-scss-boilerplate",
+  "name": "chrome-extension-manage-energy-consumption",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build && npm run build:extension-worker",
-    "build:extension-worker": "tsc ./src/extension/header-updater.worker.ts --outDir ./dist/angular-scss-boilerplate/extension/",
+    "build:extension-worker": "tsc ./src/extension/header-updater.worker.ts --outDir ./dist/chrome-extension-manage-energy-consumption/extension/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "eslint . --ext .ts"

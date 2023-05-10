@@ -4,7 +4,6 @@ import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 export enum ConsumptionMode {
   LOW = 'LOW',
   PERFORMANCE = 'PERFORMANCE',
-  SMART = 'SMART',
   CUSTOM = 'CUSTOM'
 }
 
@@ -13,7 +12,6 @@ export type Item = {
   title: string,
   subtitle: string,
   mode: ConsumptionMode,
-  description: string,
   value: number,
   disableSlider: boolean,
   id: number
@@ -23,30 +21,27 @@ export type Item = {
 const INITIAL_STATE: Item[] = [
   {
     title: 'Low consumption 🍃',
-    subtitle:'Lorem ipsum dolor sit amet, consectetur adipiscing.',
+    subtitle:'Reduce your energy consumption by decreasing the performance.',
     isChecked: false,
     mode: ConsumptionMode.LOW,
-    description: 'Low Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     value: 20,
     disableSlider: true,
     id: 0
   },
   {
     title: 'Performance 🏃‍♂️',
-    subtitle:'Lorem ipsum dolor sit amet, consectetur adipiscing.',
+    subtitle:'Best performance but high energy consumption.',
     isChecked: false,
     mode: ConsumptionMode.PERFORMANCE,
-    description: 'Performance Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     value: 80,
     disableSlider: true,
     id: 1
   },
   {
     title: 'Custom 🛠️',
-    subtitle:'Lorem ipsum dolor sit amet, consectetur adipiscing.',
+    subtitle:'Choose your own energy consumption level.',
     isChecked: false,
     mode: ConsumptionMode.CUSTOM,
-    description: 'Custom Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     value: 50,
     disableSlider: false,
     id: 3
@@ -63,13 +58,9 @@ export class ItemsService {
   private itemsSubject: BehaviorSubject<Item[]> = new BehaviorSubject(INITIAL_STATE);
   private items$: Observable<Item[]> = this.itemsSubject.asObservable()
   
-  constructor() {}
-
-  
   initItems(): void {
     chrome.storage.sync.get(['id','energy']).then((result) => {
       const {id, energy} = result;
-      console.log('init item', id, energy)
       if(!id || !energy) {
         this.setItems(INIT_ITEM.id, INIT_ITEM.value);
         return;
@@ -96,15 +87,13 @@ export class ItemsService {
     this.itemsSubject.next(updatedItems);
     chrome.storage.sync.set({'energy': value }).then(() => {
       chrome.storage.sync.set({'id': id }).then(() => {
-        chrome.runtime.sendMessage({ value }).then((response) => {
+        chrome.runtime.sendMessage({ value }).then(() => {
           console.log('Value is set to ' + value, id);
         })
       }).catch((error) => {
         console.error(error);
       });
     }).catch((error) => { console.log(error) });
-    ;
-
   }
 
   getActiveStatus(): Observable<Item> {

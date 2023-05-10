@@ -35,7 +35,7 @@ export class SliderComponent implements OnInit, OnChanges {
     const { value } = this.sliderValue;
     if(!value) return;
 
-    chrome.runtime.sendMessage({ value }).then((response) => {
+    chrome.runtime.sendMessage({ value }).then(() => {
       this.itemsService.setItems(this.id, value);
     });
   }

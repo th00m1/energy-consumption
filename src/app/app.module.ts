@@ -6,7 +6,6 @@ import { ItemComponent } from './components/item/item.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { CheckmarkComponent } from './components/checkmark/checkmark.component';
 import { EnergyMenuComponent } from './components/energy-menu/energy-menu.component';
-import { SliderComponent } from './components/slider/slider.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -17,15 +16,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ItemListComponent,
     CheckmarkComponent,
     EnergyMenuComponent,
-    SliderComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
+  imports: [BrowserModule, HttpClientModule, FormsModule, ReactiveFormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,64 +1,63 @@
-@import 'all.scss';
+@import "all.scss";
 
 .item {
-    border: solid 3px $item-border-color;
-    border-radius: 5px;
-    padding: 30px 30px;
-    cursor: pointer;
+  border: solid 3px $item-border-color;
+  border-radius: 5px;
+  padding: 30px 30px;
+  cursor: pointer;
 
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
 
-    &.low {
-        background-color: $low-bg-color;
-        border-color: $low-border-color;
+  &.low {
+    background-color: $low-bg-color;
+    border-color: $low-border-color;
 
-        app-checkmark {
-            --color-active: #{$low-check-color};
-        }
+    app-checkmark {
+      --color-active: #{$low-check-color};
     }
+  }
 
-    &.smart {
-        background-color: $smart-bg-color;
-        border-color: $smart-border-color;
+  &.smart {
+    background-color: $smart-bg-color;
+    border-color: $smart-border-color;
 
-        app-checkmark {
-            --color-active: #{$smart-check-color};
-        }
+    app-checkmark {
+      --color-active: #{$smart-check-color};
     }
+  }
 
-    &.performance {
-        background-color: $performance-bg-color;
-        border-color: $performance-border-color;
+  &.performance {
+    background-color: $performance-bg-color;
+    border-color: $performance-border-color;
 
-        app-checkmark {
-            --color-active: #{$performance-check-color};
-        }
+    app-checkmark {
+      --color-active: #{$performance-check-color};
     }
+  }
 
-    &.custom {
-        background-color: $custom-bg-color;
-        border-color: $custom-border-color;
+  &.custom {
+    background-color: $custom-bg-color;
+    border-color: $custom-border-color;
 
-        app-checkmark {
-            --color-active: #{$custom-check-color};
-        }
+    app-checkmark {
+      --color-active: #{$custom-check-color};
     }
+  }
 }
 
 .content {
-    
-    &__title {
-        color: $text-main-color;
-        font-size: $font-h2-size;
-        font-weight: $font-bold;
-    }
+  &__title {
+    color: $text-main-color;
+    font-size: $font-h2-size;
+    font-weight: $font-bold;
+  }
 
-    &__text {
-        font-size: $font-secondary-size;
-        font-weight: $font-regular;
-        color: $text-secondary-color;
-    }
+  &__text {
+    font-size: $font-secondary-size;
+    font-weight: $font-regular;
+    color: $text-secondary-color;
+  }
 }

@@ -1,37 +1,37 @@
 @import "all.scss";
 
 .container {
-    height: 100%;
-    min-width: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: rem(80);
-    padding: 0 10%;
+  height: 100%;
+  min-width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: rem(80);
+  padding: 0 10%;
+
+  @media screen and (max-width: 900px) {
+    flex-wrap: wrap;
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 5%;
+  }
+
+  app-energy-menu {
+    flex: 0.5;
 
     @media screen and (max-width: 900px) {
-        flex-wrap: wrap;
+      width: 100%;
+      flex: 1;
     }
+  }
 
-    @media screen and (max-width: 600px) {
-        padding: 5%;
+  app-energy-info {
+    flex: 0.5;
+
+    @media screen and (max-width: 900px) {
+      flex: 1;
+      width: 100%;
     }
-
-    app-energy-menu {
-        flex: 0.5;
-
-        @media screen and (max-width: 900px) {
-            width: 100%;
-            flex: 1;
-        }
-    }
-
-    app-energy-info {
-        flex: 0.5;
-
-        @media screen and (max-width: 900px) {
-            flex: 1;
-            width: 100%;
-        }
-    }
+  }
 }

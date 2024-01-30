@@ -1,10 +1,11 @@
-const HEADER_NAME = 'x-user-energy-objective';
+const REQUEST_HEADER_NAME = 'x-user-energy-objective';
+const RESPONSE_HEADER_NAME = 'x-energy-economy';
 
 const allResourceTypes = Object.values(
   chrome.declarativeNetRequest.ResourceType
 );
 
-const createRule = (value: number): chrome.declarativeNetRequest.Rule => {
+const createRule = (value: string): chrome.declarativeNetRequest.Rule => {
   return {
     id: 1,
     priority: 1,
@@ -13,8 +14,8 @@ const createRule = (value: number): chrome.declarativeNetRequest.Rule => {
       requestHeaders: [
         {
           operation: chrome.declarativeNetRequest.HeaderOperation.SET,
-          header: HEADER_NAME,
-          value: value.toString(),
+          header: REQUEST_HEADER_NAME,
+          value: value,
         },
       ],
     },
@@ -27,7 +28,7 @@ const createRule = (value: number): chrome.declarativeNetRequest.Rule => {
 
 chrome.declarativeNetRequest.updateDynamicRules({
   removeRuleIds: [1],
-  addRules: [createRule(100)],
+  addRules: [createRule('PERFORMANCE')],
 });
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
@@ -39,3 +40,30 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     message: '✅ energy header updated, new value : ' + request.value,
   });
 });
+
+const setUserEnergyEconomy = (
+  event: chrome.webRequest.WebResponseHeadersDetails
+) => {
+  if (!event.responseHeaders) return;
+
+  const energyEconomyHeader = event.responseHeaders.find(
+    (header) => header.name === RESPONSE_HEADER_NAME
+  );
+
+  if (!energyEconomyHeader) return;
+
+  const currentEconomy = Number.parseInt(energyEconomyHeader.value ?? '0');
+  chrome.storage.sync.get('energyEconomy').then((result) => {
+    const { energyEconomy } = result;
+
+    chrome.storage.sync.set({
+      energyEconomy: (energyEconomy ?? 0) + currentEconomy,
+    });
+  });
+};
+
+chrome.webRequest.onHeadersReceived.addListener(
+  (details) => setUserEnergyEconomy(details),
+  { urls: ['<all_urls>'] },
+  ['responseHeaders']
+);

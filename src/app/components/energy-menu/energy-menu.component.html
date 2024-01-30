@@ -1,4 +1,7 @@
 <div class="energy-menu">
+  <h3 *ngIf="energyEconomy$ | async as energyEconomy">
+    Energy economy: {{ energyEconomy }}J 🍃
+  </h3>
   <h2 class="energy-menu__name">Manage your energy consumption</h2>
   <app-item-list />
 </div>

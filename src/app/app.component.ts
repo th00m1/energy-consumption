@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ItemsService } from './services/items.service';
+import { EnergyEconomyService } from './services/energy-economy.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,13 @@ import { ItemsService } from './services/items.service';
 })
 export class AppComponent implements OnInit {
   title = 'chrome-extension-manage-energy-consumption';
+  private energyEconomyService = inject(EnergyEconomyService);
+  private itemsService = inject(ItemsService);
 
-  constructor(private itemsService: ItemsService) {
+  constructor() {
     this.itemsService.initItems();
+    this.energyEconomyService.init();
+    this.energyEconomyService.listen();
   }
 
   ngOnInit() {

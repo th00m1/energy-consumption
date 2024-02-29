@@ -64,9 +64,9 @@ export class ItemsService {
 }
 
 export enum ConsumptionMode {
-  LOW = 'LOW',
-  BALANCE = 'BALANCE',
-  PERFORMANCE = 'PERFORMANCE',
+  LOW = 'eco',
+  BALANCE = 'balanced',
+  PERFORMANCE = 'high',
 }
 
 export type Item = {
